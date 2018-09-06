@@ -1,0 +1,35 @@
+version: 2
+
+general:
+  branches:
+    ignore:
+    - gh-pages
+
+jobs:
+  build:
+    docker:
+    - image: circleci/node:8-browsers
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - v2-dependencies-{{ checksum "yarn.lock" }}
+    - run:
+        name: Install Dependencies
+        command: yarn --frozen-lockfile
+    - save_cache:
+        key: v2-dependencies-{{ checksum "yarn.lock" }}
+        paths:
+        - ~/.cache/yarn
+    - run:
+        name: Test lint
+        command: yarn lint
+    - run:
+        name: Test source
+        command: yarn test:ci:circle
+    - run:
+        name: Test build
+        command: yarn build
+    - run:
+        name: Report coverage
+        command: bash <(curl -s https://codecov.io/bash)
