@@ -1,6 +1,6 @@
 {
   "name": "@semantic-ui-react/event-stack",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "repository": "https://github.com/layershifter/event-stack",
   "author": "layershifter <alexander.mcgarret@gmail.com>",
   "license": "MIT",
