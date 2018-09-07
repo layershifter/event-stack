@@ -24,7 +24,7 @@ module.exports = mode =>
       jsnext: true,
       main: true,
     }),
-    mode === 'production' && require('rollup-plugin-terser'),
+    mode === 'production' && require('rollup-plugin-terser').terser(),
     mode === 'declarations' &&
       require('rollup-plugin-typescript2')({
         clean: true,
