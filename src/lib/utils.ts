@@ -4,7 +4,7 @@ import {
   InputTargetElement,
   TargetElement,
   EventListeners,
-} from './types'
+} from '../types'
 
 /**
  * An IE11-compatible function.

@@ -1,5 +1,5 @@
 import EventPool from './EventPool'
-import { EventListeners, TargetElement } from './types'
+import { EventListeners, TargetElement } from '../types'
 
 export default class EventTarget {
   private readonly handlers: Map<String, Function> = new Map()

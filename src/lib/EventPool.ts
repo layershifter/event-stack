@@ -1,6 +1,6 @@
 import EventSet from './EventSet'
 import { cloneMap } from './utils'
-import { EventListeners } from './types'
+import { EventListeners } from '../types'
 
 export default class EventPool {
   private readonly handlerSets: Map<String, EventSet>

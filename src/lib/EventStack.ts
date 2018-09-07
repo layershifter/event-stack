@@ -1,7 +1,7 @@
 import * as env from 'exenv'
 
 import EventTarget from './EventTarget'
-import { InputEventListener, InputTargetElement, Options, TargetElement } from './types'
+import { InputEventListener, InputTargetElement, Options, TargetElement } from '../types'
 import { normalizeHandlers, normalizeTarget } from './utils'
 
 export default class EventStack {

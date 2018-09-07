@@ -2,7 +2,7 @@
  * The current implementation was chosen by performance and compatibility reasons, feel free to play
  * with benchmarks and submit PR with faster alternative. Each method contains links to benchmarks.
  */
-import { EventListeners } from './types'
+import { EventListeners } from '../types'
 
 export default class EventSet {
   private readonly handlers: EventListeners
