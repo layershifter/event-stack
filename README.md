@@ -1,5 +1,26 @@
 # Event Stack
 
+<!-- Badges -->
+<p align="center">
+  <a href="https://www.npmjs.com/package/@semantic-ui-react/event-stack">
+    <img alt="npm" src="https://img.shields.io/npm/v/@semantic-ui-react/event-stack.svg?style=flat-square" />
+  </a>
+  <a href="https://circleci.com/gh/layershifter/event-stack">
+    <img alt="Circle CI" src="https://img.shields.io/circleci/project/github/layershifter/event-stack/master.svg?logo=circleci&style=flat-square" />
+  </a>
+  <a href="https://ci.appveyor.com/project/layershifter/event-stack">
+      <img alt="AppVeyor CI" src="https://img.shields.io/appveyor/ci/layershifter/event-stack/master.svg?logo=appveyor&style=flat-square" />
+    </a>
+  <a href="https://codecov.io/gh/layershifter/event-stack">
+    <img alt="Codecov" src="https://img.shields.io/codecov/c/github/layershifter/event-stack/master.svg?style=flat-square" />
+  </a>
+  <a href="https://david-dm.org/layershifter/event-stack">
+    <img alt="David" src="https://img.shields.io/david/layershifter/event-stack.svg?style=flat-square" />
+  </a>
+ 
+  <img src="http://img.badgesize.io/https://unpkg.com/@semantic-ui-react/event-stack/lib/cjs/event-stack.production.js?compression=gzip&label=gzip%20size&style=flat-square">
+</p>
+
 ## Why?
 
 The `EventStack` solves two design problems:

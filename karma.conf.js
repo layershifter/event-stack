@@ -2,6 +2,10 @@ const plugins = require('./rollup.plugins')
 
 module.exports = config => {
   config.set({
+    coverageReporter: {
+      reporters: [{ type: 'lcov', dir: 'coverage', subdir: '.' }],
+      includeAllSources: true,
+    },
     files: [{ pattern: 'src/**/*.spec.ts', type: 'js', watched: false }],
     frameworks: ['jasmine'],
     mime: {
