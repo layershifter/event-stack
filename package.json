@@ -26,6 +26,7 @@
     "@types/react": "^16.4.14",
     "@types/react-test-renderer": "^16.0.2",
     "babel-plugin-istanbul": "^5.0.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.15",
     "cross-env": "^5.2.0",
     "husky": "^0.14.3",
     "jasmine-core": "^3.2.1",
