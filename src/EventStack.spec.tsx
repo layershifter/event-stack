@@ -15,7 +15,7 @@ describe('EventStack', () => {
     it('renders nothing', () => {
       const wrapper = TestRenderer.create(<EventStack {...requiredProps} />);
 
-      expect(wrapper.root.children.length).toBe(0)
+      expect(wrapper.toJSON()).toBe(null)
     })
   })
 
