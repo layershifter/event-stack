@@ -1,6 +1,3 @@
-import EventStack from './lib/EventStack'
-
-const instance = new EventStack()
-
-export default instance
+export { instance } from './lib'
+export { default } from './EventStack'
 export * from './types'
