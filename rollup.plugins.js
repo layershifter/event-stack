@@ -1,14 +1,7 @@
-const path = require('path')
-
 module.exports = mode =>
   [
-    mode !== 'declarations' &&
-      require('rollup-plugin-alias')({
-        resolve: ['.ts'],
-        lib: path.resolve('./src/lib'),
-      }),
     require('rollup-plugin-commonjs')({
-      include: /exenv/,
+      include: ['node_modules/exenv/**'].filter(Boolean),
       extensions: ['.js'],
       namedExports: {
         'node_modules/exenv/index.js': ['canUseDOM'],
@@ -17,12 +10,16 @@ module.exports = mode =>
     mode !== 'declarations' &&
       require('rollup-plugin-babel')({
         exclude: 'node_modules/**',
-        extensions: ['.ts', '.js'],
+        extensions: ['.ts', '.tsx', '.js'],
       }),
     require('rollup-plugin-node-resolve')({
-      extensions: ['.ts', '.js'],
+      extensions: ['.ts', '.tsx', '.js'],
+      browser: true,
       jsnext: true,
       main: true,
+    }),
+    require('rollup-plugin-replace')({
+      'process.env.NODE_ENV': JSON.stringify(mode),
     }),
     mode === 'production' && require('rollup-plugin-terser').terser(),
     mode === 'declarations' &&

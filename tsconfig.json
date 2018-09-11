@@ -2,6 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "./lib/types",
+    "jsx": "react",
     "lib": [
       "es2015",
       "dom"
