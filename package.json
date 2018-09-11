@@ -63,7 +63,7 @@
   },
   "scripts": {
     "build": "node build.js",
-    "lint": "tslint \"./src/**/*.ts\" \"./test/**/*.ts\"",
+    "lint": "tslint \"./src/**/*.{ts,tsx}\" \"./test/**/*.{ts,tsx}\"",
     "precommit": "lint-staged",
     "postcommit": "git update-index --again",
     "prerelease": "yarn lint && yarn test --browsers ChromeHeadless && yarn build",
@@ -90,7 +90,7 @@
       "prettier --write",
       "git add"
     ],
-    "*.ts": [
+    "*.{ts,tsx}": [
       "prettier --parser typescript --write",
       "tslint --fix",
       "git add"

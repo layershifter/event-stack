@@ -1,19 +1,18 @@
 import * as React from 'react'
-import * as TestRenderer from 'react-test-renderer';
+import * as TestRenderer from 'react-test-renderer'
 
 import EventStack from './EventStack'
-import {instance} from './lib/index'
+import { instance } from './lib/index'
 
 const requiredProps = {
   name: 'click',
-  on: () => {
-  },
+  on: () => {},
 }
 
 describe('EventStack', () => {
   describe('children', () => {
     it('renders nothing', () => {
-      const wrapper = TestRenderer.create(<EventStack {...requiredProps} />);
+      const wrapper = TestRenderer.create(<EventStack {...requiredProps} />)
 
       expect(wrapper.toJSON()).toBe(null)
     })
@@ -33,7 +32,7 @@ describe('EventStack', () => {
       unsub.calls.reset()
 
       // Check calls on componentDidUpdate()
-      wrapper.update(<EventStack {...requiredProps} name='resize'/>)
+      wrapper.update(<EventStack {...requiredProps} name="resize" />)
 
       expect(unsub).toHaveBeenCalledBefore(sub)
       expect(unsub).toHaveBeenCalledTimes(1)
@@ -58,7 +57,7 @@ describe('EventStack', () => {
   describe('name', () => {
     it('passes "name" to eventStack', () => {
       const sub = spyOn(instance, 'sub')
-      TestRenderer.create(<EventStack {...requiredProps} name='resize'/>)
+      TestRenderer.create(<EventStack {...requiredProps} name="resize" />)
 
       expect(sub).toHaveBeenCalledTimes(1)
       expect(sub).toHaveBeenCalledWith('resize', jasmine.any(Function), jasmine.any(Object))
@@ -69,7 +68,7 @@ describe('EventStack', () => {
     it('passes "on" to eventStack', () => {
       const sub = spyOn(instance, 'sub')
       const on = jasmine.createSpy('on')
-      TestRenderer.create(<EventStack {...requiredProps} on={on}/>)
+      TestRenderer.create(<EventStack {...requiredProps} on={on} />)
 
       expect(sub).toHaveBeenCalledTimes(1)
       expect(sub).toHaveBeenCalledWith('click', on, jasmine.any(Object))
@@ -82,15 +81,23 @@ describe('EventStack', () => {
       TestRenderer.create(<EventStack {...requiredProps} />)
 
       expect(sub).toHaveBeenCalledTimes(1)
-      expect(sub).toHaveBeenCalledWith('click', jasmine.any(Function), jasmine.objectContaining({pool: 'default'}))
+      expect(sub).toHaveBeenCalledWith(
+        'click',
+        jasmine.any(Function),
+        jasmine.objectContaining({ pool: 'default' }),
+      )
     })
 
     it('passes "on" to eventStack', () => {
       const sub = spyOn(instance, 'sub')
-      TestRenderer.create(<EventStack {...requiredProps} pool='foo'/>)
+      TestRenderer.create(<EventStack {...requiredProps} pool="foo" />)
 
       expect(sub).toHaveBeenCalledTimes(1)
-      expect(sub).toHaveBeenCalledWith('click', jasmine.any(Function), jasmine.objectContaining({pool: 'foo'}))
+      expect(sub).toHaveBeenCalledWith(
+        'click',
+        jasmine.any(Function),
+        jasmine.objectContaining({ pool: 'foo' }),
+      )
     })
 
     describe('target', () => {
@@ -99,15 +106,23 @@ describe('EventStack', () => {
         TestRenderer.create(<EventStack {...requiredProps} />)
 
         expect(sub).toHaveBeenCalledTimes(1)
-        expect(sub).toHaveBeenCalledWith('click', jasmine.any(Function), jasmine.objectContaining({target: 'document'}))
+        expect(sub).toHaveBeenCalledWith(
+          'click',
+          jasmine.any(Function),
+          jasmine.objectContaining({ target: 'document' }),
+        )
       })
 
       it('passes "on" to eventStack', () => {
         const sub = spyOn(instance, 'sub')
-        TestRenderer.create(<EventStack {...requiredProps} target='window'/>)
+        TestRenderer.create(<EventStack {...requiredProps} target="window" />)
 
         expect(sub).toHaveBeenCalledTimes(1)
-        expect(sub).toHaveBeenCalledWith('click', jasmine.any(Function), jasmine.objectContaining({target: 'window'}))
+        expect(sub).toHaveBeenCalledWith(
+          'click',
+          jasmine.any(Function),
+          jasmine.objectContaining({ target: 'window' }),
+        )
       })
     })
   })
