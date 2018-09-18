@@ -7,7 +7,7 @@ module.exports = mode =>
         'node_modules/exenv/index.js': ['canUseDOM'],
       },
     }),
-    mode !== 'declarations' &&
+    mode !== 'typings' &&
       require('rollup-plugin-babel')({
         exclude: 'node_modules/**',
         extensions: ['.ts', '.tsx', '.js'],
@@ -22,9 +22,10 @@ module.exports = mode =>
       'process.env.NODE_ENV': JSON.stringify(mode),
     }),
     mode === 'production' && require('rollup-plugin-terser').terser(),
-    mode === 'declarations' &&
+    mode === 'typings' &&
       require('rollup-plugin-typescript2')({
         clean: true,
+        tsconfig: 'build/tsconfig.json',
         useTsconfigDeclarationDir: true,
       }),
   ].filter(Boolean)

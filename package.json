@@ -8,9 +8,11 @@
     "src",
     "lib"
   ],
-  "main": "lib/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/es/index.js",
   "types": "lib/types/index.d.ts",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "exenv": "^1.2.2",
     "prop-types": "^15.6.2"
   },
@@ -62,7 +64,11 @@
     "react-dom": "^16.0.0"
   },
   "scripts": {
-    "build": "node build.js",
+    "build": "rimraf ./lib && yarn build:development && yarn build:production && yarn build:entry && yarn build:typings",
+    "build:development": "cross-env NODE_ENV=development node ./build/bundle.js",
+    "build:production": "cross-env NODE_ENV=production node ./build/bundle.js",
+    "build:entry": "node ./build/entry.js",
+    "build:typings": "node ./build/typings.js",
     "lint": "tslint \"./src/**/*.{ts,tsx}\" \"./test/**/*.{ts,tsx}\"",
     "precommit": "lint-staged",
     "postcommit": "git update-index --again",
