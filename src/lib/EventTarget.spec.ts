@@ -74,5 +74,18 @@ describe('EventTarget', () => {
       expect(handler1).toHaveBeenCalledTimes(2)
       expect(handler2).toHaveBeenCalledTimes(1)
     })
+
+    it('removes unexisting handler', () => {
+      const handler = jasmine.createSpy()
+
+      eventTarget.addHandlers('default', 'click', [handler])
+      simulant.fire(document, 'click')
+
+      eventTarget.removeHandlers('default', 'click', [handler])
+      eventTarget.removeHandlers('default', 'click', [handler])
+      simulant.fire(document, 'click')
+
+      expect(handler).toHaveBeenCalledTimes(1)
+    })
   })
 })
