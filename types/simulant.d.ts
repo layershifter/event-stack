@@ -1,7 +1,7 @@
-module 'simulant' {
-  function fire(target: Document | HTMLElement | Window, eventType: string);
-
-  export {
-    fire,
+declare module 'simulant' {
+  const simulant: {
+    fire: (target: Document | HTMLElement | Window, eventType: string) => void
   }
+
+  export default simulant
 }

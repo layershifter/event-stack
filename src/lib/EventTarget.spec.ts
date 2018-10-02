@@ -1,15 +1,11 @@
 import simulant from 'simulant'
 import EventTarget from './EventTarget'
 
+let eventTarget: EventTarget
+
 describe('EventTarget', () => {
-  let target
-
   beforeEach(() => {
-    target = new EventTarget(document)
-  })
-
-  afterEach(() => {
-    target = null
+    eventTarget = new EventTarget(document)
   })
 
   describe('addHandlers', () => {
@@ -17,8 +13,8 @@ describe('EventTarget', () => {
       const handler1 = jasmine.createSpy()
       const handler2 = jasmine.createSpy()
 
-      target.addHandlers('default', 'click', [handler1])
-      target.addHandlers('default', 'click', [handler2])
+      eventTarget.addHandlers('default', 'click', [handler1])
+      eventTarget.addHandlers('default', 'click', [handler2])
       simulant.fire(document, 'click')
 
       expect(handler1).toHaveBeenCalledTimes(1)
@@ -29,8 +25,8 @@ describe('EventTarget', () => {
       const handler1 = jasmine.createSpy()
       const handler2 = jasmine.createSpy()
 
-      target.addHandlers('default', 'click', [handler1])
-      target.addHandlers('another', 'click', [handler2])
+      eventTarget.addHandlers('default', 'click', [handler1])
+      eventTarget.addHandlers('another', 'click', [handler2])
       simulant.fire(document, 'click')
 
       expect(handler1).toHaveBeenCalledTimes(1)
@@ -40,12 +36,12 @@ describe('EventTarget', () => {
 
   describe('hasHandlers', () => {
     it('is "false" when has not handlers', () => {
-      expect(target.hasHandlers()).toBeFalsy()
+      expect(eventTarget.hasHandlers()).toBeFalsy()
     })
 
     it('is "true" when has handlers', () => {
-      target.addHandlers('default', 'click', [jasmine.createSpy()])
-      expect(target.hasHandlers()).toBeTruthy()
+      eventTarget.addHandlers('default', 'click', [jasmine.createSpy()])
+      expect(eventTarget.hasHandlers()).toBeTruthy()
     })
   })
 
@@ -54,10 +50,10 @@ describe('EventTarget', () => {
       const handler1 = jasmine.createSpy()
       const handler2 = jasmine.createSpy()
 
-      target.addHandlers('default', 'click', [handler1, handler2])
+      eventTarget.addHandlers('default', 'click', [handler1, handler2])
       simulant.fire(document, 'click')
 
-      target.removeHandlers('default', 'click', [handler2])
+      eventTarget.removeHandlers('default', 'click', [handler2])
       simulant.fire(document, 'click')
 
       expect(handler1).toHaveBeenCalledTimes(2)
@@ -68,11 +64,11 @@ describe('EventTarget', () => {
       const handler1 = jasmine.createSpy()
       const handler2 = jasmine.createSpy()
 
-      target.addHandlers('default', 'click', [handler1])
-      target.addHandlers('another', 'click', [handler2])
+      eventTarget.addHandlers('default', 'click', [handler1])
+      eventTarget.addHandlers('another', 'click', [handler2])
       simulant.fire(document, 'click')
 
-      target.removeHandlers('another', 'click', [handler2])
+      eventTarget.removeHandlers('another', 'click', [handler2])
       simulant.fire(document, 'click')
 
       expect(handler1).toHaveBeenCalledTimes(2)
