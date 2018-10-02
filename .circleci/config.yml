@@ -29,7 +29,7 @@ jobs:
         command: yarn test:ci:circle
     - run:
         name: Test build
-        command: yarn build
+        command: yarn test:ts
     - run:
         name: Report coverage
         command: bash <(curl -s https://codecov.io/bash)

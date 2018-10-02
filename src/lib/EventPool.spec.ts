@@ -7,7 +7,7 @@ describe('EventPool', () => {
       let pool = new EventPool('default', new Map())
 
       pool = pool.addHandlers('click', [handler])
-      pool.dispatchEvent('click', null)
+      pool.dispatchEvent('click', document.createEvent('Event'))
 
       expect(handler).toHaveBeenCalledTimes(1)
     })
@@ -20,8 +20,8 @@ describe('EventPool', () => {
       pool = pool.addHandlers('click', [clickHandler])
       pool = pool.addHandlers('mousedown', [mouseDown])
 
-      pool.dispatchEvent('click', null)
-      pool.dispatchEvent('mousedown', null)
+      pool.dispatchEvent('click', document.createEvent('Event'))
+      pool.dispatchEvent('mousedown', document.createEvent('Event'))
 
       expect(clickHandler).toHaveBeenCalledTimes(1)
       expect(mouseDown).toHaveBeenCalledTimes(1)
@@ -42,8 +42,8 @@ describe('EventPool', () => {
       const pool = EventPool.createByType('default', 'click', [handler1])
       const another = pool.addHandlers('click', [handler2])
 
-      pool.dispatchEvent('click', null)
-      another.dispatchEvent('click', null)
+      pool.dispatchEvent('click', document.createEvent('Event'))
+      another.dispatchEvent('click', document.createEvent('Event'))
 
       expect(handler1).toHaveBeenCalledTimes(2)
       expect(handler2).toHaveBeenCalledTimes(1)
@@ -69,9 +69,9 @@ describe('EventPool', () => {
       const handler = jasmine.createSpy()
       let pool = EventPool.createByType('default', 'click', [handler])
 
-      pool.dispatchEvent('click', null)
+      pool.dispatchEvent('click', document.createEvent('Event'))
       pool = pool.removeHandlers('click', [handler])
-      pool.dispatchEvent('click', null)
+      pool.dispatchEvent('click', document.createEvent('Event'))
 
       expect(handler).toHaveBeenCalledTimes(1)
     })
@@ -80,9 +80,9 @@ describe('EventPool', () => {
       const handler = jasmine.createSpy()
       let pool = EventPool.createByType('default', 'click', [handler])
 
-      pool.dispatchEvent('click', null)
+      pool.dispatchEvent('click', document.createEvent('Event'))
       pool = pool.removeHandlers('mousedown', [handler])
-      pool.dispatchEvent('click', null)
+      pool.dispatchEvent('click', document.createEvent('Event'))
 
       expect(handler).toHaveBeenCalledTimes(2)
     })
@@ -102,8 +102,8 @@ describe('EventPool', () => {
       const pool = EventPool.createByType('default', 'click', [handler1, handler2])
       const another = pool.removeHandlers('click', [handler2])
 
-      pool.dispatchEvent('click', null)
-      another.dispatchEvent('click', null)
+      pool.dispatchEvent('click', document.createEvent('Event'))
+      another.dispatchEvent('click', document.createEvent('Event'))
 
       expect(handler1).toHaveBeenCalledTimes(2)
       expect(handler2).toHaveBeenCalledTimes(1)
