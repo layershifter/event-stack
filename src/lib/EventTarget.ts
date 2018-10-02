@@ -11,8 +11,6 @@ export default class EventTarget {
   }
 
   public addHandlers(poolName: string, eventType: string, eventHandlers: EventListeners) {
-    this.removeTargetHandler(eventType)
-
     if (this.pools.has(poolName)) {
       const eventPool = this.pools.get(poolName) as EventPool
 
@@ -21,14 +19,16 @@ export default class EventTarget {
       this.pools.set(poolName, EventPool.createByType(poolName, eventType, eventHandlers))
     }
 
-    this.addTargetHandler(eventType)
+    if (!this.handlers.has(eventType)) {
+      this.addTargetHandler(eventType)
+    }
   }
 
-  hasHandlers(): boolean {
+  public hasHandlers(): boolean {
     return this.handlers.size > 0
   }
 
-  removeHandlers(poolName: string, eventType: string, eventHandlers: EventListeners) {
+  public removeHandlers(poolName: string, eventType: string, eventHandlers: EventListeners) {
     if (!this.pools.has(poolName)) {
       return
     }
@@ -42,34 +42,33 @@ export default class EventTarget {
       this.pools.delete(poolName)
     }
 
-    this.removeTargetHandler(eventType)
-
-    if (this.pools.size > 0) {
-      this.addTargetHandler(eventType)
+    if (this.pools.size === 0) {
+      this.removeTargetHandler(eventType)
     }
   }
 
-  private createEmitter = (
-    eventType: string,
-    eventPools: Map<String, EventPool>,
-  ): EventListener => {
+  private createEmitter = (eventType: string): EventListener => {
     return (event: Event) => {
-      eventPools.forEach(pool => {
+      this.pools.forEach(pool => {
         pool.dispatchEvent(eventType, event)
       })
     }
   }
 
   private addTargetHandler(eventType: string) {
-    const handler = this.createEmitter(eventType, this.pools)
+    const handler = this.createEmitter(eventType)
 
     this.handlers.set(eventType, handler)
-    this.target.addEventListener(eventType, handler)
+    this.target.addEventListener(eventType, handler, true)
   }
 
   private removeTargetHandler(eventType: string) {
     if (this.handlers.has(eventType)) {
-      this.target.removeEventListener(eventType, this.handlers.get(eventType) as EventListener)
+      this.target.removeEventListener(
+        eventType,
+        this.handlers.get(eventType) as EventListener,
+        true,
+      )
       this.handlers.delete(eventType)
     }
   }
