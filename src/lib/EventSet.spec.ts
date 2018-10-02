@@ -1,21 +1,22 @@
 import EventSet from './EventSet'
 
-describe('EventSet', () => {
-  let set: EventSet
+let set: EventSet
 
+describe('EventSet', () => {
   beforeEach(() => {
     set = new EventSet([])
   })
 
   describe('addHandlers', () => {
     it('adds a single handler', () => {
+      const event = document.createEvent('Event')
       const handler = jasmine.createSpy()
 
       set = set.addHandlers([handler])
-      set.dispatchEvent(null, true)
+      set.dispatchEvent(event, true)
 
       expect(handler).toHaveBeenCalledTimes(1)
-      expect(handler).toHaveBeenCalledWith(null)
+      expect(handler).toHaveBeenCalledWith(event)
     })
 
     it('adds multiple handlers', () => {
@@ -23,7 +24,7 @@ describe('EventSet', () => {
       const handler2 = jasmine.createSpy('handler2')
 
       set = set.addHandlers([handler1, handler2])
-      set.dispatchEvent(null, true)
+      set.dispatchEvent(document.createEvent('Event'), true)
 
       expect(handler1).toHaveBeenCalledTimes(1)
       expect(handler2).toHaveBeenCalledTimes(1)
@@ -33,7 +34,7 @@ describe('EventSet', () => {
       const handler1 = jasmine.createSpy('handler1')
       const handler2 = jasmine.createSpy('handler2')
       set = set.addHandlers([handler1, handler1, handler2, handler2])
-      set.dispatchEvent(null, true)
+      set.dispatchEvent(document.createEvent('Event'), true)
 
       expect(handler1).toHaveBeenCalledTimes(1)
       expect(handler2).toHaveBeenCalledTimes(1)
@@ -53,7 +54,7 @@ describe('EventSet', () => {
       const handler2 = jasmine.createSpy('handler2')
 
       set = set.addHandlers([handler1, handler2])
-      set.dispatchEvent(null, true)
+      set.dispatchEvent(document.createEvent('Event'), true)
 
       expect(handler1).toHaveBeenCalledTimes(1)
       expect(handler2).toHaveBeenCalledTimes(1)
@@ -64,7 +65,7 @@ describe('EventSet', () => {
       const handler2 = jasmine.createSpy('handler2')
 
       set = set.addHandlers([handler1, handler2, handler1])
-      set.dispatchEvent(null, false)
+      set.dispatchEvent(document.createEvent('Event'), false)
 
       expect(handler1).toHaveBeenCalledTimes(1)
       expect(handler2).not.toHaveBeenCalled()
@@ -76,7 +77,7 @@ describe('EventSet', () => {
       const handler3 = jasmine.createSpy('handler3')
 
       set = set.addHandlers([handler1, handler2, handler3, handler1])
-      set.dispatchEvent(null, true)
+      set.dispatchEvent(document.createEvent('Event'), true)
 
       expect(handler1).toHaveBeenCalledTimes(1)
       expect(handler2).toHaveBeenCalledTimes(1)
@@ -105,10 +106,10 @@ describe('EventSet', () => {
       const handler2 = jasmine.createSpy('handler2')
 
       set = set.addHandlers([handler1, handler2])
-      set.dispatchEvent(null, true)
+      set.dispatchEvent(document.createEvent('Event'), true)
 
       set = set.removeHandlers([handler2])
-      set.dispatchEvent(null, true)
+      set.dispatchEvent(document.createEvent('Event'), true)
 
       expect(handler1).toHaveBeenCalledTimes(2)
       expect(handler2).toHaveBeenCalledTimes(1)
@@ -119,10 +120,10 @@ describe('EventSet', () => {
       const handler2 = jasmine.createSpy('handler2')
 
       set = set.addHandlers([handler1, handler2])
-      set.dispatchEvent(null, true)
+      set.dispatchEvent(document.createEvent('Event'), true)
 
       set = set.removeHandlers([handler1, handler2])
-      set.dispatchEvent(null, true)
+      set.dispatchEvent(document.createEvent('Event'), true)
 
       expect(handler1).toHaveBeenCalledTimes(1)
       expect(handler2).toHaveBeenCalledTimes(1)

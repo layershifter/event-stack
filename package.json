@@ -67,7 +67,7 @@
     "lint": "tslint \"./src/**/*.{ts,tsx}\" \"./test/**/*.{ts,tsx}\"",
     "precommit": "lint-staged",
     "postcommit": "git update-index --again",
-    "prerelease": "yarn lint && yarn test --browsers ChromeHeadless && yarn build",
+    "prerelease": "yarn lint && yarn test --browsers ChromeHeadless && yarn test:ts && yarn build",
     "release:major": "yarn prerelease && release-it major",
     "release:minor": "yarn prerelease && release-it minor",
     "release:patch": "yarn prerelease && release-it patch",
@@ -75,6 +75,7 @@
     "test": "cross-env NODE_ENV=test karma start karma.conf.js",
     "test:ci:veyor": "yarn test --browsers IE",
     "test:ci:circle": "yarn test --browsers ChromeHeadless,Firefox",
+    "test:ts": "tsc",
     "test:watch": "yarn test --browsers ChromeHeadless --no-single-run"
   },
   "browserslist": [
