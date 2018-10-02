@@ -6,6 +6,11 @@ export default class EventPool {
   private readonly handlerSets: Map<String, EventSet>
   private readonly poolName: string
 
+  public constructor(poolName: string, handlerSets: Map<String, EventSet>) {
+    this.handlerSets = handlerSets
+    this.poolName = poolName
+  }
+
   public static createByType = (
     poolName: string,
     eventType: string,
@@ -15,11 +20,6 @@ export default class EventPool {
     handlerSets.set(eventType, new EventSet(eventHandlers))
 
     return new EventPool(poolName, handlerSets)
-  }
-
-  private constructor(poolName: string, handlerSets: Map<String, EventSet>) {
-    this.handlerSets = handlerSets
-    this.poolName = poolName
   }
 
   public addHandlers(eventType: string, eventHandlers: EventListeners): EventPool {
