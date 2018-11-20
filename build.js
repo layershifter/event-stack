@@ -42,11 +42,16 @@ const writeEntry = () =>
       `
 'use strict';
 
+var stack;
+
 if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./cjs/event-stack.production.js');
+  stack = require('./cjs/event-stack.production.js');
 } else {
-  module.exports = require('./cjs/event-stack.development.js');
+  stack = require('./cjs/event-stack.development.js');
 }
+
+module.exports = stack.default;
+module.exports.instance = stack.instance;
 `,
       err => {
         if (err) reject(err)
