@@ -53,7 +53,7 @@ class MyComponent extends Component {
   render() {
     return (
       <div>
-        <EventStack on={this.handleResize} target="window" />
+        <EventStack name="resize" on={this.handleResize} target="window" />
       </div>
     )
   }
