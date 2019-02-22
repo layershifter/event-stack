@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { normalizeHandlers, normalizeTarget } from './utils'
 
 describe('normalizeHandlers', () => {
@@ -37,6 +38,18 @@ describe('normalizeTarget', () => {
       const element = document.createElement('div')
 
       expect(normalizeTarget(element)).toBe(element)
+    })
+  })
+
+  describe('ref', () => {
+    it('returns a node when valid ref is passed', () => {
+      const current = document.createElement('div')
+
+      expect(normalizeTarget({ current })).toBe(current)
+    })
+
+    it('returns `document` when empty ref is passed', () => {
+      expect(normalizeTarget(React.createRef())).toBe(document)
     })
   })
 

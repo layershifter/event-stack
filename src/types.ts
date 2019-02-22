@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 export type EventListeners = CallableEventListener[]
 
 export type CallableEventListener = EventListener & {
@@ -6,7 +8,7 @@ export type CallableEventListener = EventListener & {
 
 export type InputEventListener = EventListener | EventListener[]
 
-export type InputTargetElement = boolean | string | TargetElement
+export type InputTargetElement = boolean | string | TargetElement | React.RefObject<TargetElement>
 
 export type TargetElement = Document | HTMLElement | Window
 
