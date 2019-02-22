@@ -36,6 +36,9 @@ export default class EventStack extends React.PureComponent<EventStackProps> {
       // Heads up!
       // This condition for SSR safety.
       PropTypes.instanceOf(env.canUseDOM ? HTMLElement : Object),
+      PropTypes.shape({
+        current: PropTypes.object,
+      })
     ]),
   }
 
