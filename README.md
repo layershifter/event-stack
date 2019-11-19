@@ -1,3 +1,13 @@
+# Deprecated
+
+Issues mentioned in `README` should be solved by other approaches:
+- `.addEventListener()` is blazing fast and is not a real performance issue 
+- to solve issues with ordering in case when regular DOM event propogation is not available consider to use things like https://github.com/palmerhq/react-register-nodes.
+
+Please avoid usages of this library. 
+
+---
+
 <!-- Name -->
 <h1 align="center">Event Stack</h1>
 
